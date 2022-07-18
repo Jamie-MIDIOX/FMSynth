@@ -1,0 +1,26 @@
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+; FMTASK.def
+;
+; Copyright (c) 1993 Jamie O'Connell.  All Rights Reserved.
+;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+NAME        FMTASK
+
+DESCRIPTION 'FM Synth Task'
+
+EXETYPE     WINDOWS
+
+STUB        'JWOSTUB.EXE'
+
+CODE        MOVEABLE DISCARDABLE PRELOAD
+DATA        MOVEABLE PRELOAD SINGLE
+
+HEAPSIZE    1024
+STACKSIZE   4096
+
+EXPORTS
+    TaskWndProc @1
+
+            

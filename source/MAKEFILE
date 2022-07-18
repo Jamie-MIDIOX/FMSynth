@@ -1,0 +1,139 @@
+############################################################################
+#
+#   makefile
+#
+#   Copyright (c) 1991-1992 Microsoft Corporation.  All Rights Reserved.
+#
+#   constructs fmsynth device driver
+#
+#   to build a debug version:
+#       NMAKE DEBUG=YES
+#   to build a non debug version:
+#       NMAKE DEBUG=NO
+#
+############################################################################
+
+NAME    = fmsynth
+OBJ1    = fmsyntha.obj fmsynth.obj midimain.obj midic.obj midiin.obj sysparm.obj
+OBJ2    = init.obj drvproc.obj config.obj 
+OBJS    = libinit.obj $(OBJ1) $(OBJ2)
+LIBS    = libw mmsystem mdllcew commdlg 
+
+# !!! ctl3dv2
+# !!! ctl3dd.obj
+
+!if "$(DEBUG)" == "YES"
+DEF     = -DDEBUG
+CLOPT   = -Oxws -Zid
+MASMOPT = -Zi
+LINKOPT = /CO/LI
+!else
+DEF     =
+CLOPT   = -Oxws
+MASMOPT =
+LINKOPT =
+!endif
+
+# NOTE - this code is compiled *without* windows prolog/epilog
+#        (no -Gw), so all exported routines must have _loadds
+#  -Alnw
+
+CC      = cl -c -nologo -W3 -Zp -G2s -AMnw $(DEF) $(CLOPT)
+ASM     = masm -Mx -t -D?QUIET $(DEF) $(MASMOPT)
+LINK    = link /NOPACKCODE/NOD/NOE/MAP/ALIGN:16 $(LINKOPT)
+
+.c.obj:
+    @$(CC) -NT _TEXT $*.c
+
+.asm.obj:
+    @echo $(@B).asm
+    @$(ASM) $*;
+
+###################### goal ######################
+
+goal: $(NAME).drv
+    @echo ***** finished making $(NAME) *****
+
+
+..\bin\$(NAME).sym: $$(@F)
+   @copy $(@F) $@
+
+##################################################
+
+$(NAME).drv $(NAME).sym: $(OBJS) fmsynth.def $(NAME).res
+    @$(LINK) @<<
+    libinit.obj+
+    $(OBJ1)+
+    $(OBJ2),
+    $(NAME).drv,
+    $(NAME).map,
+    $(LIBS),
+    fmsynth.def
+<<
+    @rc -t $(DEF) $(NAME).res $(NAME).drv
+    @mapsym /n $(NAME).map
+
+$(NAME).res: fmsynth.rc fmsynth.h genmidi.ibk drum.ibk perc.bin fmvers.h
+    @rc $(DEF) -r -z fmsynth.rc
+
+################## segmentation ##################
+#   INIT_TEXT is the init code
+#   _TEXT is the init/exit and non-interrupt time segment
+#   _FIX  is the interrupt time fixed segment
+#   Made TEXT be fixed JWO 940324
+
+SEG  = $(CC) -NT TSEG $*.c
+SEGA = $(ASM) -DSEGNAME=TSEG $*;
+
+libinit.obj     : ; $(SEGA:TSEG=_TEXT)
+drvproc.obj     : ; @$(SEG:TSEG=_TEXT)
+config.obj     : ; @$(SEG:TSEG=_TEXT) 
+init.obj        : ; @$(SEG:TSEG=_TEXT)
+fmsyntha.obj      : ; $(SEGA:TSEG=_TEXT)
+midic.obj       : ; @$(SEG:TSEG=_TEXT)
+midiin.obj       : ; @$(SEG:TSEG=_TEXT)
+midimain.obj    : ; @$(SEG:TSEG=_TEXT)
+fmsynth.obj       : ; @$(SEG:TSEG=_TEXT)
+sysparm.obj       : ; @$(SEG:TSEG=_TEXT)
+
+##################### clean ######################
+
+clean:
+    -del $(NAME).drv
+    -del $(NAME).res
+    -del *.sym
+    -del *.map
+    -del *.obj
+    -del *.cod
+
+##################### depend #####################
+
+depend:
+    mv makefile makefile.old
+    sed "/^# START Dependencies/,/^# END Dependencies/D" makefile.old > makefile
+    -del makefile.old
+    echo # START Dependencies >> makefile
+    includes -l *.c *.asm >> makefile
+    echo # END Dependencies >> makefile
+
+##################################################
+# START Dependencies 
+fmsynth.obj: fmsynth.c fmsynth.h
+
+drvproc.obj: drvproc.c fmsynth.h
+
+config.obj: config.c fmsynth.h fmstring.h
+
+fmsyntha.obj: fmsyntha.asm
+
+init.obj: init.c fmsynth.h fmstring.h
+
+midic.obj: midic.c fmsynth.h fmvers.h
+
+midiin.obj: midiin.c fmsynth.h fmvers.h
+
+libinit.obj: libinit.asm
+
+midimain.obj: midimain.c fmsynth.h
+
+# END Dependencies 

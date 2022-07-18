@@ -1,0 +1,161 @@
+//Microsoft App Studio generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#define APSTUDIO_HIDDEN_SYMBOLS
+#include "windows.h"
+#undef APSTUDIO_HIDDEN_SYMBOLS
+#include "ver.h"
+#include "fmsynth.h"
+#include "fmcfg.h"
+#include "fmvers.h"
+
+/////////////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+//////////////////////////////////////////////////////////////////////////////
+//
+// 256
+//
+
+DEFAULTBANK 256 MOVEABLE PURE "GENMIDI.IBK"
+
+//////////////////////////////////////////////////////////////////////////////
+//
+// 258
+//
+
+DEFAULTDRUMBANK 258 MOVEABLE PURE "DRUM.IBK"
+
+//////////////////////////////////////////////////////////////////////////////
+//
+// Version
+//
+
+VS_VERSION_INFO VERSIONINFO
+FILEVERSION DRIVER_MAJOR,DRIVER_MINOR,256,DRIVER_RELEASE
+PRODUCTVERSION DRIVER_MAJOR,DRIVER_MINOR,256,DRIVER_RELEASE
+FILEFLAGSMASK 0x3fL
+FILEFLAGS 0x0L
+FILEOS 0x10001L
+FILETYPE 0x3L
+FILESUBTYPE 0x8L
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "040904E4"
+        BEGIN
+            VALUE "CompanyName", "Jamie O'Connell\0"
+            VALUE "FileDescription", "FM MIDI Synth driver\0"
+            VALUE "FileVersion", VERSTR
+            VALUE "InternalName", "FMSYNTH.DRV\0"
+            VALUE "LegalCopyright", "Copyright \251 1993-1995 Jamie O'Connell\0"
+            VALUE "OriginalFilename", "FMSYNTH.DRV\0"
+            VALUE "ProductName", "FM Synth MIDI Driver\0"
+            VALUE "ProductVersion", VERSTR
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x409, 1252 
+    END
+END
+
+
+//////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+DLG_CONFIG DIALOG DISCARDABLE  33, 40, 124, 116
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "FM Synth Setup"
+FONT 8, "MS Sans Serif"
+BEGIN
+    GROUPBOX        "Port",IDC_PORTGRP,8,3,45,90,WS_TABSTOP
+    RADIOBUTTON     "220",IDC_220,12,14,28,12,WS_TABSTOP
+    RADIOBUTTON     "228",IDC_228,12,26,28,12,WS_TABSTOP
+    RADIOBUTTON     "240",IDC_240,12,38,28,12,WS_TABSTOP
+    RADIOBUTTON     "388",IDC_388,12,50,28,12,WS_TABSTOP
+    RADIOBUTTON     "Other:",IDC_OTHR,12,62,35,12,WS_TABSTOP
+    EDITTEXT        IDC_EPORT,22,75,25,12
+    GROUPBOX        "Card Style",IDC_CHIPGRP,62,3,54,56,WS_TABSTOP
+    RADIOBUTTON     "One OPL2",IDC_1OPL2,66,15,46,12,WS_TABSTOP
+    RADIOBUTTON     "Two OPL2",IDC_2OPL2,66,29,46,12,WS_TABSTOP
+    RADIOBUTTON     "One OPL3",IDC_1OPL3,66,43,46,12,WS_TABSTOP
+    PUSHBUTTON      "OK",1,62,80,32,14
+    PUSHBUTTON      "Cancel",2,62,97,32,14
+    PUSHBUTTON      "&Help",IDC_HELP,62,62,32,14
+    ICON            "FMSYNTH",IDC_STATIC,99,92,18,20
+    LTEXT           "FM Synth Driver",IDC_STATIC,3,95,54,8
+    LTEXT           "Jamie O'Connell",IDC_STATIC,3,104,53,8
+END
+
+
+//////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+FMSYNTH                 ICON    DISCARDABLE     "FMDRV.ICO"
+
+#ifdef APSTUDIO_INVOKED
+//////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "#define APSTUDIO_HIDDEN_SYMBOLS\r\n"
+    "#include ""windows.h""\r\n"
+    "#undef APSTUDIO_HIDDEN_SYMBOLS\r\n"
+    "#include ""ver.h""\r\n"
+    "#include ""fmsynth.h""\r\n"
+    "#include ""fmcfg.h""\r\n"
+    "#include ""fmvers.h""\r\n"
+    "#include ""ctl3d.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "\r\n"
+    "\0"
+END
+
+/////////////////////////////////////////////////////////////////////////////////////
+#endif    // APSTUDIO_INVOKED
+
+
+//////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_ERRBADPORT          "The port setting does not match those on the card. Check your hardware settings, and then try again."
+END
+
+
+#ifndef APSTUDIO_INVOKED
+////////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+
+
+/////////////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

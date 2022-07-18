@@ -1,0 +1,48 @@
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+; FMSYNTH.def
+;
+; Copyright (c) 1993 Jamie O'Connell.  All Rights Reserved.
+;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+LIBRARY     FMSYNTH
+
+DESCRIPTION 'midi:Jamie O''Connell FM MIDI Synth'
+
+EXETYPE     WINDOWS
+            PROTMODE
+
+CODE        MOVEABLE DISCARDABLE LOADONCALL
+DATA        FIXED    PRELOAD SINGLE
+
+SEGMENTS    _TEXT    FIXED                PRELOAD
+
+HEAPSIZE    0
+
+EXPORTS     WEP
+            DriverProc         @1
+            modMessage         @2
+            midMessage         @3
+            ConfigDlgProc      @4
+            GetTimbre          @7
+            SetTimbre          @8
+            GetPercMap         @9
+            SetPercMap         @10
+            GetParm            @11
+            SetParm            @12
+            UpdBank            @13
+            GetBankPath        @14
+            SoundBoardInit     @15
+            ResetTimbres       @16
+            StoreTask          @17
+            SoundFullInit      @18
+            MIDIOff            @19
+            MIDIOn             @20
+            WriteParms         @21
+
+
+
+
+
+            
